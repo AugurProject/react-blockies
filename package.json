@@ -2,8 +2,16 @@
   "name": "react-blockies",
   "version": "0.0.1",
   "description": "Ethereum Style Identicons for React",
-  "main": "index.js",
+  "main": "build/main.js",
   "repository": "git@github.com:oodlabs/react-blockies.git",
   "author": "ood labs llc <git@oodlabs.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "jsx --non-strict-es6module src/main.jsx > dist/main.js",
+    "prepublish": "npm run build"
+  },
+  "dependencies": {
+    "react": "15.5.4",
+    "react-tools": "0.13.3"
+  }
 }
