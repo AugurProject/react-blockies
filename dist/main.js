@@ -20,6 +20,8 @@ export default class Identicon extends Component {
   }
 
   generateIdenticon(options) {
+    console.log('options -- ', options, this);
+
     // The random number is a js implementation of the Xorshift PRNG
     const randseed = new Array(4); // Xorshift: [x, y, z, w] 32 bit values
 
