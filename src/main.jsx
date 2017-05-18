@@ -12,7 +12,8 @@ export default class Identicon extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    if (!isEquivalent(this.props, nextProps)) this.generateIdenticon({ ...nextProps });
+    const isEquivalent = isEquivalent(this.props, nextProps);
+    if (!isEquivalent) this.generateIdenticon({ ...nextProps });
   }
 
   generateIdenticon(options) {
