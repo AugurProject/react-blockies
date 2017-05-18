@@ -3,11 +3,7 @@ import React, { Component, PropTypes } from 'react';
 export default class Identicon extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      icon: null
-    };
-
+    
     this.generateIdenticon = this.generateIdenticon.bind(this);
   }
 
@@ -104,7 +100,7 @@ export default class Identicon extends Component {
         if (imageData[i]) {
           const row = Math.floor(i / width);
           const col = i % width;
-          
+
           cc.fillRect(col * scale, row * scale, scale, scale);
         }
       }
