@@ -10,7 +10,7 @@ export default class Identicon extends Component {
   }
 
   componentDidMount() {
-    this.generateIdenticon({ seed: this.props.seed });
+    this.generateIdenticon(_extends({}, this.props));
   }
 
   componentWillUpdate(nextProps) {
