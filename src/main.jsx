@@ -12,8 +12,26 @@ export default class Identicon extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    const isEquivalent = isEquivalent(this.props, nextProps);
-    if (!isEquivalent) this.generateIdenticon({ ...nextProps });
+    if (!this.isEquivalent(this.props, nextProps)) this.generateIdenticon({ ...nextProps });
+  }
+
+  isEquivalent(prevProps, nextProps) {
+    var aProps = Object.getOwnPropertyNames(prevProps);
+    var bProps = Object.getOwnPropertyNames(nextProps);
+
+    if (aProps.length != bProps.length) {
+      return false;
+    }
+
+    for (var i = 0; i < aProps.length; i++) {
+      var propName = aProps[i];
+
+      if (prevProps[propName] !== nextProps[propName]) {
+          return false;
+      }
+    }
+
+    return true;
   }
 
   generateIdenticon(options) {
@@ -137,23 +155,4 @@ Identicon.propTypes = {
   color: PropTypes.string,
   bgColor: PropTypes.string,
   spotColor: PropTypes.string
-}
-
-function isEquivalent(prevProps, nextProps) {
-  var aProps = Object.getOwnPropertyNames(prevProps);
-  var bProps = Object.getOwnPropertyNames(nextProps);
-
-  if (aProps.length != bProps.length) {
-    return false;
-  }
-
-  for (var i = 0; i < aProps.length; i++) {
-    var propName = aProps[i];
-
-    if (prevProps[propName] !== nextProps[propName]) {
-        return false;
-    }
-  }
-
-  return true;
 }
