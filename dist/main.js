@@ -105,8 +105,13 @@ export default class Identicon extends Component {
 
     function setCanvas(identicon, imageData, color, scale, bgcolor, spotcolor) {
       const width = Math.sqrt(imageData.length);
-      identicon.width = width * scale;
-      identicon.height = width * scale;
+      const size = width * scale;
+
+      identicon.width = size;
+      identicon.style.width = `${size}px`;
+
+      identicon.height = size;
+      identicon.style.height = `${size}px`;
 
       const cc = identicon.getContext('2d');
       cc.fillStyle = bgcolor;
