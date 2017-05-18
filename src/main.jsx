@@ -16,11 +16,12 @@ export default class Identicon extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    if (this.props.seed !== nextProps.seed) this.generateIdenticon({ seed: nextProps.seed });
+    if (!isEquivalent(this.props, nextProps)) this.generateIdenticon({ ...nextProps });
   }
 
   generateIdenticon(options) {
-    console.log('options -- ', options, this);
+    // NOTE --  Majority of this code is referenced from: https://github.com/alexvandesande/blockies
+    //          Mostly to ensure congruence to Ethereum Mist's Identicons
 
     // The random number is a js implementation of the Xorshift PRNG
     const randseed = new Array(4); // Xorshift: [x, y, z, w] 32 bit values
@@ -96,13 +97,14 @@ export default class Identicon extends Component {
       cc.fillStyle = color;
 
       for (let i = 0; i < imageData.length; i++) {
-        const row = Math.floor(i / width);
-        const col = i % width;
         // if data is 2, choose spot color, if 1 choose foreground
         cc.fillStyle = (imageData[i] === 1) ? color : spotcolor;
 
         // if data is 0, leave the background
         if (imageData[i]) {
+          const row = Math.floor(i / width);
+          const col = i % width;
+          
           cc.fillRect(col * scale, row * scale, scale, scale);
         }
       }
@@ -116,8 +118,8 @@ export default class Identicon extends Component {
     seedrand(seed);
 
     const color = opts.color || createColor();
-    const bgcolor = opts.bgcolor || createColor();
-    const spotcolor = opts.spotcolor || createColor();
+    const bgcolor = opts.bgColor || createColor();
+    const spotcolor = opts.spotColor || createColor();
     const imageData = createImageData(size);
     const canvas = setCanvas(this.identicon, imageData, color, scale, bgcolor, spotcolor);
 
@@ -129,4 +131,32 @@ export default class Identicon extends Component {
       <canvas ref={(identicon) => { this.identicon = identicon; }} />
     );
   }
+}
+
+Identicon.propTypes = {
+  seed: PropTypes.string.isRequired,
+  size: PropTypes.number,
+  scale: PropTypes.number,
+  color: PropTypes.string,
+  bgColor: PropTypes.string,
+  spotColor: PropTypes.string
+}
+
+function isEquivalent(prevProps, nextProps) {
+  var aProps = Object.getOwnPropertyNames(prevProps);
+  var bProps = Object.getOwnPropertyNames(nextProps);
+
+  if (aProps.length != bProps.length) {
+    return false;
+  }
+
+  for (var i = 0; i < aProps.length; i++) {
+    var propName = aProps[i];
+
+    if (a[propName] !== b[propName]) {
+        return false;
+    }
+  }
+
+  return true;
 }
