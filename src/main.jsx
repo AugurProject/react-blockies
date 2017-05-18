@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 export default class Identicon extends Component {
   constructor(props) {
     super(props);
-    
+
     this.generateIdenticon = this.generateIdenticon.bind(this);
   }
 
@@ -149,7 +149,7 @@ function isEquivalent(prevProps, nextProps) {
   for (var i = 0; i < aProps.length; i++) {
     var propName = aProps[i];
 
-    if (a[propName] !== b[propName]) {
+    if (prevProps[propName] !== nextProps[propName]) {
         return false;
     }
   }
