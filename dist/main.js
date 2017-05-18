@@ -144,9 +144,12 @@ export default class Identicon extends Component {
   }
 
   render() {
-    return React.createElement('canvas', { ref: identicon => {
+    return React.createElement('canvas', {
+      ref: identicon => {
         this.identicon = identicon;
-      } });
+      },
+      className: 'identicon'
+    });
   }
 }
 

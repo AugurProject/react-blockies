@@ -143,7 +143,10 @@ export default class Identicon extends Component {
 
   render() {
     return (
-      <canvas ref={(identicon) => { this.identicon = identicon; }} />
+      <canvas
+        ref={(identicon) => { this.identicon = identicon; }}
+        className="identicon"
+      />
     );
   }
 }
