@@ -1,9 +1,9 @@
 {
   "name": "react-blockies",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Ethereum Style Identicons for React",
   "main": "dist/main.js",
-  "repository": "git@github.com:oodlabs/react-blockies.git",
+  "repository": "git@github.com:AugurProject/react-blockies.git",
   "author": "Augur",
   "license": "MIT",
   "scripts": {
